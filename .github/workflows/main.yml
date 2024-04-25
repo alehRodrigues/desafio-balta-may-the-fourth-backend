@@ -22,7 +22,8 @@ jobs:
             - name: Build
               run: dotnet build ./src/StarisApi/StarisApi.csproj --configuration Release --no-restore
             - name: Publish
-              run: dotnet publish ./src/StarisApi/StarisApi.csproj --runtime win-x64 --self-contained --configuration Release --output ./publish
+              run: dotnet publish ./src/StarisApi/StarisApi.csproj --runtime win-x86 --self-contained --configuration Release --output ./publish
+
             - name: Deploy Sync Files
               uses: SamKirkland/FTP-Deploy-Action@v4.3.5
               with:
