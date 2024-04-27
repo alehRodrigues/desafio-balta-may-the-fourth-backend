@@ -11,9 +11,10 @@ namespace StarisApi.Repository
 {
     public class Repository<TEntity> where TEntity : Entity, new()
     {
-        private readonly SqliteContext context;
+        //protected readonly SqliteContext context;
+        protected readonly MySqlContext context;
 
-        public Repository(SqliteContext context) => this.context = context;
+        public Repository(MySqlContext context) => this.context = context;
 
         public IDto? Find(int id)
         {

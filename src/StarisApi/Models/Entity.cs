@@ -1,4 +1,5 @@
 ﻿using StarisApi.Dtos;
+using StarisApi.Models.Characters;
 using System.Globalization;
 
 namespace StarisApi.Models
@@ -9,6 +10,7 @@ namespace StarisApi.Models
 
         public abstract string GetSearchParameter();
         public abstract T ConvertToDto<T>() where T : class;
+
 
         public string? ValidateSortParameter(string? parameter)
         {

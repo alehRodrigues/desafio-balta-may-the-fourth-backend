@@ -1,6 +1,7 @@
 ﻿using StarisApi.Dtos;
 using StarisApi.Models.CharactersMovies;
 using StarisApi.Models.Planets;
+using System.Text.Json;
 
 namespace StarisApi.Models.Characters
 {
@@ -39,6 +40,7 @@ namespace StarisApi.Models.Characters
 
             return character!;
         }
+
 
         public override string GetSearchParameter() => "Name";
     }

@@ -29,13 +29,20 @@ builder.Services.AddSwaggerGen(opt =>
     opt.OperationFilter<ParameterAttribute>();
 });
 
-builder.Services.AddDbContext<SqliteContext>(opt =>
+//builder.Services.AddDbContext<SqliteContext>(opt =>
+//{
+//    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
+//       .UseLazyLoadingProxies();
+//});
+
+builder.Services.AddDbContext<MySqlContext>(opt =>
 {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
+    opt.UseMySQL(builder.Configuration.GetConnectionString("MySql")!)
        .UseLazyLoadingProxies();
 });
 
-builder.Services.AddTransient<SqliteContext>();
+//builder.Services.AddTransient<SqliteContext>();
+builder.Services.AddTransient<MySqlContext>();
 builder.Services.AddTransient<DataBaseFeeder>();
 builder.Services.AddScoped(typeof(Repository<>));
 
