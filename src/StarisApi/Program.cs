@@ -12,6 +12,13 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("VaderPolicy",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient();
 builder.Services.Configure<JsonOptions>(opt => opt.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -42,6 +49,8 @@ builder.Services.AddScoped(typeof(Repository<>));
 Configurations.Host = builder.Configuration.GetValue<string>("Host")!;
 
 var app = builder.Build();
+
+app.UseCors("VaderPolicy");
 
 app.UseRouting();
 
