@@ -7,6 +7,7 @@ using StarisApi.Models.MoviesVehicles;
 using StarisApi.Models.Planets;
 using StarisApi.Models.StarShips;
 using StarisApi.Models.Vehicles;
+using System.Runtime.Intrinsics.Arm;
 using System.Text.Json;
 
 namespace StarisApi.Repository;
@@ -599,5 +600,76 @@ public class DataBaseFeeder
     public int GetIdFromUrl(string[] url)
     {
         return int.Parse(url[^2]);
+    }
+
+    public async Task<Dictionary<int, string>> ScrappyUrlImage(Dictionary<int, string> entityNames)
+    {
+        var urls = MountUrlString(entityNames);
+        var entityUrlImagesRelation = new Dictionary<int, string>();
+
+        foreach (var url in urls)
+        {
+            string htmlContent = await client.GetStringAsync(url.Value);
+            entityUrlImagesRelation.Add(url.Key, ExtractImageUrl(htmlContent));
+        }
+
+        return entityUrlImagesRelation;
+    }
+
+    public List<Movie> ScrappyUrlImageForMovies(List<Movie> movies)
+    {
+        List<string> imageUrls = [
+                                    "https://lumiere-a.akamaihd.net/v1/images/EP1-IA-99993-RESIZED_f9ae99b6.jpeg",
+                                    "https://lumiere-a.akamaihd.net/v1/images/EP2-IA-69221-RESIZED_1e8e0971.jpeg",
+                                    "https://lumiere-a.akamaihd.net/v1/images/image_ff356cdb.jpeg",
+                                    "https://lumiere-a.akamaihd.net/v1/images/EP4_POS_2_D-RESIZED_f977074a.jpeg",
+                                    "https://lumiere-a.akamaihd.net/v1/images/image_ca7910bd.jpeg",
+                                    "https://lumiere-a.akamaihd.net/v1/images/EP6_POS_21_R-RESIZED_2873dc04.jpeg",
+                                    "https://lumiere-a.akamaihd.net/v1/images/avco_payoff_1-sht_v7_lg_32e68793.jpeg"
+                                  ];
+        movies = [.. movies.OrderBy(x => x.Episode)];
+
+        for (int i = 0; i < movies.Count; i++)
+        {
+            movies[i].ImageUrl = imageUrls[i];
+        }
+
+        return movies;
+    }
+
+    public Dictionary<int, string> MountUrlString(Dictionary<int, string> entityNames)
+    {
+        string urlBase = "https://starwars.fandom.com/wiki/";
+        
+        return entityNames.ToDictionary(
+            kvp => kvp.Key,
+            kvp => $"{urlBase}{kvp.Value.Replace(" ", "_")}"
+        );
+    }
+
+    string ExtractImageUrl(string htmlContent)
+    {
+        int startIndex = htmlContent.IndexOf("<a", StringComparison.OrdinalIgnoreCase);
+        string resultUrl = string.Empty;
+        
+        while (startIndex != -1)
+        {
+            if (htmlContent.IndexOf("class=\"image image-thumbnail\"", startIndex, StringComparison.OrdinalIgnoreCase) != -1)
+            {
+                int hrefIndex = htmlContent.IndexOf("href=\"", startIndex, StringComparison.OrdinalIgnoreCase);
+                if (hrefIndex != -1)
+                {
+                    int endIndex = htmlContent.IndexOf("\"", hrefIndex + 6, StringComparison.OrdinalIgnoreCase);
+                    if (endIndex != -1)
+                    {
+                        resultUrl = htmlContent.Substring(hrefIndex + 6, endIndex - hrefIndex - 6);
+                    }
+                }
+            }
+
+            startIndex = htmlContent.IndexOf("<a", startIndex + 1, StringComparison.OrdinalIgnoreCase);
+        }
+
+        return resultUrl;
     }
 }

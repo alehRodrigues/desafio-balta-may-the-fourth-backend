@@ -34,6 +34,7 @@ namespace StarisApi.Models.Characters
                 Height = Height,
                 Mass = Mass,
                 SkinColor = SkinColor,
+                ImageUrl = ImageUrl,
                 Homeworld = new ListDto(PlanetId, Planet.Name),
                 Movies = Movies.Select(x => new ListDto(x.MovieId, x.Movie.Title)).ToList()
             } as T;

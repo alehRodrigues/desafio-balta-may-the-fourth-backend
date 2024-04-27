@@ -15,5 +15,6 @@ public class MovieDbMap : IEntityTypeConfiguration<Movie>
         builder.Property(x => x.OpeningCrawl).HasColumnType("varchar(50)").IsRequired();
         builder.Property(x => x.ReleaseDate).HasColumnType("varchar(50)").IsRequired();
         builder.Property(x => x.Title).HasColumnType("varchar(50)").IsRequired();
+        builder.Property(x => x.ImageUrl).HasColumnType("varchar(255)").IsRequired().HasDefaultValue(string.Empty);
     }
 }

@@ -12,6 +12,7 @@
         public string Terrain { get; set; } = null!;
         public string SurfaceWater { get; set; } = null!;
         public string Population { get; set; } = null!;
+        public string ImageUrl { get; set; } = string.Empty;
         public ICollection<ListDto> Characters { get; set; } = null!;
         public ICollection<ListDto> Movies { get; set; } = null!;
     }

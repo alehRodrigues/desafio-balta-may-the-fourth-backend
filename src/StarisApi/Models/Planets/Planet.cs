@@ -32,7 +32,8 @@ public class Planet : Entity
                 Population = Population,
                 Climate = Climate,
                 Terrain = Terrain,
-                SurfaceWater = SurfaceWater,                
+                SurfaceWater = SurfaceWater,   
+                ImageUrl = ImageUrl,
                 Characters = Characters.Select(x => new ListDto(x.Id, x.Name)).ToList(),
                 Movies = Movies.Select(x => new ListDto(x.MovieId, x.Movie.Title)).ToList(),
             } as T;

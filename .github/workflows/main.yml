@@ -4,9 +4,6 @@ on:
     pull_request:
         branches:
             - main
-    push:
-        branches:
-            - main
 
 jobs:
     publish:
@@ -22,11 +19,12 @@ jobs:
             - name: Build
               run: dotnet build ./src/StarisApi/StarisApi.csproj --configuration Release --no-restore
             - name: Publish
-              run: dotnet publish ./src/StarisApi/StarisApi.csproj --runtime win-x64 --self-contained --configuration Release /p:PublishSingleFile=true --output ./publish
+              run: dotnet publish ./src/StarisApi/StarisApi.csproj --runtime win-x86 --self-contained --configuration Release --output ./publish
+
             - name: Deploy Sync Files
               uses: SamKirkland/FTP-Deploy-Action@v4.3.5
               with:
-                    server: site3813.siteasp.net
+                    server: site3829.siteasp.net
                     server-dir: ./wwwroot/
                     username: ${{ secrets.ftp_user }}
                     password: ${{ secrets.ftp_password }}

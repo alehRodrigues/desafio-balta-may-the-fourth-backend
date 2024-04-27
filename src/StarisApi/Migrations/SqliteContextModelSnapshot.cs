@@ -14,7 +14,11 @@ namespace StarisApi.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true);
 
             modelBuilder.Entity("StarisApi.Models.Characters.Character", b =>
                 {
@@ -41,6 +45,12 @@ namespace StarisApi.Migrations
                     b.Property<string>("Height")
                         .IsRequired()
                         .HasColumnType("varchar(30)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)")
+                        .HasDefaultValue("");
 
                     b.Property<string>("Mass")
                         .IsRequired()
@@ -85,27 +95,6 @@ namespace StarisApi.Migrations
                     b.ToTable("CharactersMovies", (string)null);
                 });
 
-            modelBuilder.Entity("StarisApi.Models.CharactersPlanets.CharacterPlanet", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CharacterId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PlanetId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CharacterId");
-
-                    b.HasIndex("PlanetId");
-
-                    b.ToTable("CharacetsPlanets", (string)null);
-                });
-
             modelBuilder.Entity("StarisApi.Models.Movies.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -116,9 +105,16 @@ namespace StarisApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("Episode")
+                    b.Property<string>("Episode")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasAnnotation("CheckConstraint", "CK_Episode_MinValue: Episode >= 1");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)")
+                        .HasDefaultValue("");
 
                     b.Property<string>("OpeningCrawl")
                         .IsRequired()
@@ -222,6 +218,12 @@ namespace StarisApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(30)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)")
+                        .HasDefaultValue("");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(30)");
@@ -276,6 +278,12 @@ namespace StarisApi.Migrations
                     b.Property<string>("HyperDriveRating")
                         .IsRequired()
                         .HasColumnType("varchar(30)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)")
+                        .HasDefaultValue("");
 
                     b.Property<string>("Lenght")
                         .IsRequired()
@@ -336,6 +344,12 @@ namespace StarisApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(30)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)")
+                        .HasDefaultValue("");
+
                     b.Property<string>("Lenght")
                         .IsRequired()
                         .HasColumnType("varchar(30)");
@@ -383,7 +397,7 @@ namespace StarisApi.Migrations
             modelBuilder.Entity("StarisApi.Models.CharactersMovies.CharacterMovie", b =>
                 {
                     b.HasOne("StarisApi.Models.Characters.Character", "Character")
-                        .WithMany()
+                        .WithMany("Movies")
                         .HasForeignKey("CharacterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -399,25 +413,6 @@ namespace StarisApi.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("StarisApi.Models.CharactersPlanets.CharacterPlanet", b =>
-                {
-                    b.HasOne("StarisApi.Models.Characters.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("StarisApi.Models.Planets.Planet", "Planet")
-                        .WithMany()
-                        .HasForeignKey("PlanetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Character");
-
-                    b.Navigation("Planet");
-                });
-
             modelBuilder.Entity("StarisApi.Models.MoviesPlanet.MoviePlanet", b =>
                 {
                     b.HasOne("StarisApi.Models.Movies.Movie", "Movie")
@@ -427,7 +422,7 @@ namespace StarisApi.Migrations
                         .IsRequired();
 
                     b.HasOne("StarisApi.Models.Planets.Planet", "Planet")
-                        .WithMany()
+                        .WithMany("Movies")
                         .HasForeignKey("PlanetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -446,7 +441,7 @@ namespace StarisApi.Migrations
                         .IsRequired();
 
                     b.HasOne("StarisApi.Models.StarShips.Starship", "Starship")
-                        .WithMany()
+                        .WithMany("Movies")
                         .HasForeignKey("StarshipId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -465,7 +460,7 @@ namespace StarisApi.Migrations
                         .IsRequired();
 
                     b.HasOne("StarisApi.Models.Vehicles.Vehicle", "Vehicle")
-                        .WithMany()
+                        .WithMany("Movies")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -473,6 +468,11 @@ namespace StarisApi.Migrations
                     b.Navigation("Movie");
 
                     b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("StarisApi.Models.Characters.Character", b =>
+                {
+                    b.Navigation("Movies");
                 });
 
             modelBuilder.Entity("StarisApi.Models.Movies.Movie", b =>
@@ -489,6 +489,18 @@ namespace StarisApi.Migrations
             modelBuilder.Entity("StarisApi.Models.Planets.Planet", b =>
                 {
                     b.Navigation("Characters");
+
+                    b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("StarisApi.Models.StarShips.Starship", b =>
+                {
+                    b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("StarisApi.Models.Vehicles.Vehicle", b =>
+                {
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

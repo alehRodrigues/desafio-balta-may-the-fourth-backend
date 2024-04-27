@@ -23,6 +23,7 @@ Desenvolvimento de uma API completa, fornecendo recursos como criação, leitura
 * .NET 8
 * ASP.NET
 * Minimal APIs
+* SQLite
 
 ## 🥋 Skills Desenvolvidas
 * Comunicação

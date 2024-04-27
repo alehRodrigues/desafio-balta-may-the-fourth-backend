@@ -23,5 +23,6 @@ public class StarshipDbMap : IEntityTypeConfiguration<Starship>
         builder.Property(x => x.Megalights).HasColumnType("varchar(30)").IsRequired();
         builder.Property(x => x.Passengers).HasColumnType("varchar(30)").IsRequired();
         builder.Property(x => x.StarshipClass).HasColumnType("varchar(30)").IsRequired();
+        builder.Property(x => x.ImageUrl).HasColumnType("varchar(255)").IsRequired().HasDefaultValue(string.Empty);
     }
 }

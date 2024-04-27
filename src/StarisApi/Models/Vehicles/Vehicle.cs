@@ -16,7 +16,7 @@ public class Vehicle : Entity
     public string MaxAtmospheringSpeed { get; set; } = null!;
     public string CargoCapacity { get; set; } = null!;
     public string Consumables { get; set; } = null!;
-
+    
     public virtual ICollection<MovieVehicle> Movies { get; set; } = [];
 
     public override T ConvertToDto<T>()
@@ -36,6 +36,7 @@ public class Vehicle : Entity
             MaxAtmospheringSpeed = MaxAtmospheringSpeed,
             CargoCapacity = CargoCapacity,
             Consumables = Consumables,
+            ImageUrl = ImageUrl,
             Movies = Movies.Select(x => new ListDto(x.MovieId, x.Movie.Title)).ToList()
         } as T;
 

@@ -13,6 +13,7 @@ namespace StarisApi.Dtos
         public string Height { get; set; } = null!;
         public string Mass { get; set; } = null!;
         public string SkinColor { get; set; } = null!;
+        public string ImageUrl { get; set; } = string.Empty;
         public ListDto Homeworld { get; set; } = null!;
         public ICollection<ListDto> Movies { get; set; } = null!;
 

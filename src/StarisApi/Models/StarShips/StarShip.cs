@@ -39,6 +39,7 @@ public class Starship : Entity
             Megalights = Megalights,
             CargoCapacity = CargoCapacity,
             Consumables = Consumables,
+            ImageUrl = ImageUrl,
             Movies = Movies.Select(x => new ListDto(x.MovieId, x.Movie.Title)).ToList(),
         } as T;
         

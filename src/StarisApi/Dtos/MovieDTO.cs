@@ -11,6 +11,7 @@ namespace StarisApi.Dtos
         public string Director { get; set; } = null!;
         public string Production { get; set; } = null!;
         public string ReleaseDate { get; set; } = null!;
+        public string ImageUrl { get; set; } = string.Empty;
         public ICollection<ListDto> Characters { get; set; } = null!;
         public ICollection<ListDto> Planets { get; set; } = null!;
         public ICollection<ListDto> Vehicles { get; set; } = null!;

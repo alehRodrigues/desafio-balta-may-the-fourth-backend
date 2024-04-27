@@ -14,7 +14,6 @@ public class Movie : Entity
     public string Director { get; set; } = null!;
     public string Producer { get; set; } = null!;
     public string ReleaseDate { get; set; } = null!;
-
     public virtual ICollection<CharacterMovie> Characters { get; set; } = [];
     public virtual ICollection<MoviePlanet> Planets { get; set; } = [];
     public virtual ICollection<MovieVehicle> Vehicles { get; set; } = [];
@@ -31,6 +30,7 @@ public class Movie : Entity
                 Director = Director,
                 Production = Producer,
                 ReleaseDate = ReleaseDate,
+                ImageUrl = ImageUrl,
                 Characters = Characters.Select(x => new ListDto(x.CharacterId, x.Character.Name)).ToList(),
                 Planets = Planets.Select(x => new ListDto(x.PlanetId, x.Planet.Name)).ToList(),
                 Vehicles = Vehicles.Select(x => new ListDto(x.VehicleId, x.Vehicle.Name)).ToList(),

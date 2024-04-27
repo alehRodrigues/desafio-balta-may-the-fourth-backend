@@ -18,5 +18,6 @@ public class PlanetDbMap : IEntityTypeConfiguration<Planet>
         builder.Property(x => x.RotationSpeed).HasColumnType("varchar(30)").IsRequired();
         builder.Property(x => x.SurfaceWater).HasColumnType("varchar(30)").IsRequired();
         builder.Property(x => x.Terrain).HasColumnType("varchar(30)").IsRequired();
+        builder.Property(x => x.ImageUrl).HasColumnType("varchar(255)").IsRequired().HasDefaultValue(string.Empty);
     }
 }

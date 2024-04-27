@@ -7,6 +7,7 @@ namespace StarisApi.Models
     public abstract class Entity
     {
         public int Id { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
 
         public abstract string GetSearchParameter();
         public abstract T ConvertToDto<T>() where T : class;
