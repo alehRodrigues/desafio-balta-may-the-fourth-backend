@@ -9,15 +9,15 @@ namespace StarisApi.Requests
         public string? Search { get; set; }
 
         public int? Page { get; set; } = 1;
-        
-        public int? PerPage { get ; set; } = 10;
+
+        public int? PerPage { get; set; } = 10;
 
         public string? SortBy { get; set; }
 
-        public string? SortOrder 
-        { 
-            get => GetSortOrder(); 
-            set => sortOrder = value; 
+        public string? SortOrder
+        {
+            get => GetSortOrder();
+            set => sortOrder = value;
         }
 
         private string? GetSortOrder()

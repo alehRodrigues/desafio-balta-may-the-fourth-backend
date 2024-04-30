@@ -15,12 +15,14 @@ namespace StarisApi.Migrations
                 table: "Characters",
                 type: "INTEGER",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Characters_PlanetId",
                 table: "Characters",
-                column: "PlanetId");
+                column: "PlanetId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Characters_Planets_PlanetId",
@@ -28,7 +30,8 @@ namespace StarisApi.Migrations
                 column: "PlanetId",
                 principalTable: "Planets",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         /// <inheritdoc />
@@ -36,15 +39,12 @@ namespace StarisApi.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Characters_Planets_PlanetId",
-                table: "Characters");
+                table: "Characters"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_Characters_PlanetId",
-                table: "Characters");
+            migrationBuilder.DropIndex(name: "IX_Characters_PlanetId", table: "Characters");
 
-            migrationBuilder.DropColumn(
-                name: "PlanetId",
-                table: "Characters");
+            migrationBuilder.DropColumn(name: "PlanetId", table: "Characters");
         }
     }
 }

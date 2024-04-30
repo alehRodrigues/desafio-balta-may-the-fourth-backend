@@ -16,6 +16,5 @@ namespace StarisApi.Dtos
         public ICollection<ListDto> Planets { get; set; } = null!;
         public ICollection<ListDto> Vehicles { get; set; } = null!;
         public ICollection<ListDto> Starships { get; set; } = null!;
-
     }
 }

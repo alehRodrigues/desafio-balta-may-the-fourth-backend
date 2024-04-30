@@ -1,6 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using System.Globalization;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Globalization;
 
 namespace StarisApi.Configurations.Attributtes
 {

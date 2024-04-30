@@ -14,7 +14,8 @@ namespace StarisApi.Migrations
                 name: "Movies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "varchar(50)", nullable: false),
                     Episode = table.Column<int>(type: "int", nullable: false),
@@ -26,14 +27,14 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Movies", x => x.Id);
-                });
+                }
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Movies");
+            migrationBuilder.DropTable(name: "Movies");
         }
     }
 }

@@ -1,3 +1,5 @@
+using System.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -5,10 +7,7 @@ using StarisApi.Configurations;
 using StarisApi.Configurations.Attributtes;
 using StarisApi.DbContexts;
 using StarisApi.Endpoints;
-using StarisApi.Endpoints.DataBaseFeeders;
 using StarisApi.Repository;
-using System.Reflection;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +20,9 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient();
-builder.Services.Configure<JsonOptions>(opt => opt.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.Configure<JsonOptions>(opt =>
+    opt.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
+);
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.EnableAnnotations();
@@ -39,11 +40,11 @@ builder.Services.AddSwaggerGen(opt =>
 builder.Services.AddDbContext<SqliteContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
-       .UseLazyLoadingProxies();
+        .UseLazyLoadingProxies();
 });
 
 builder.Services.AddTransient<SqliteContext>();
-builder.Services.AddTransient<DataBaseFeeder>();
+builder.Services.AddScoped(typeof(DataBaseFeederRepository<>));
 builder.Services.AddScoped(typeof(Repository<>));
 
 Configurations.Host = builder.Configuration.GetValue<string>("Host")!;
@@ -56,8 +57,10 @@ app.UseRouting();
 
 app.UseEndpoints(endpoint =>
 {
-    _ = endpoint.MapGet("/", async context => await Task.Run(() =>
-    context.Response.Redirect("/swagger/index.html")));
+    _ = endpoint.MapGet(
+        "/",
+        async context => await Task.Run(() => context.Response.Redirect("/swagger/index.html"))
+    );
 });
 
 app.UseHttpsRedirection();
@@ -69,12 +72,12 @@ app.UseSwaggerUI(c =>
 });
 app.UseDeveloperExceptionPage();
 
-
 app.MapGroup("/api").MapEndpoints();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapGroup("/api").MapDatabaseFeederEndpoits();
+    app.MapGroup("/api").MapFeeder();
+    app.MapGroup("/api").MapDataRelationFeederEndpoits();
 }
 
 app.Run();

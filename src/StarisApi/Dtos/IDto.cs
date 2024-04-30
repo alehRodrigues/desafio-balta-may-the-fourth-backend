@@ -1,7 +1,4 @@
 ﻿namespace StarisApi.Dtos
 {
-    public interface IDto
-    {
-        
-    }
+    public interface IDto { }
 }

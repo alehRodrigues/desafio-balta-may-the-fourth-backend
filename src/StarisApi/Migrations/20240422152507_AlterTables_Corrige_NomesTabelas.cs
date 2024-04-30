@@ -14,7 +14,8 @@ namespace StarisApi.Migrations
                 name: "Starships",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Model = table.Column<string>(type: "varchar(30)", nullable: false),
                     Name = table.Column<string>(type: "varchar(30)", nullable: false),
@@ -24,7 +25,10 @@ namespace StarisApi.Migrations
                     Lenght = table.Column<string>(type: "varchar(30)", nullable: false),
                     Crew = table.Column<string>(type: "varchar(30)", nullable: false),
                     Passengers = table.Column<string>(type: "varchar(30)", nullable: false),
-                    MaxAtmospheringSpeed = table.Column<string>(type: "varchar(30)", nullable: false),
+                    MaxAtmospheringSpeed = table.Column<string>(
+                        type: "varchar(30)",
+                        nullable: false
+                    ),
                     HyperDriveRating = table.Column<string>(type: "varchar(30)", nullable: false),
                     Megalights = table.Column<string>(type: "varchar(30)", nullable: false),
                     CargoCapacity = table.Column<string>(type: "varchar(30)", nullable: false),
@@ -33,92 +37,106 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Starships", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.RenameColumn(
                 name: "CharacterId",
                 table: "PeoplePlanets",
-                newName: "PersonId");
+                newName: "PersonId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "MovieId",
                 table: "PeopleMovies",
-                newName: "PersonId");
+                newName: "PersonId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "CharacterId",
                 table: "PeopleMovies",
-                newName: "FilmId");
+                newName: "FilmId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "MovieId",
                 table: "FilmVehicles",
-                newName: "FilmId");
+                newName: "FilmId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "MovieId",
                 table: "FilmsStarships",
-                newName: "FilmId");
+                newName: "FilmId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "MovieId",
                 table: "FilmsPlanets",
-                newName: "FilmId");
+                newName: "FilmId"
+            );
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Starships",
-                table: "Starships",
-                column: "Id");
+            migrationBuilder.AddPrimaryKey(name: "PK_Starships", table: "Starships", column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PeoplePlanets_PersonId",
                 table: "PeoplePlanets",
-                column: "PersonId");
+                column: "PersonId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_PeoplePlanets_PlanetId",
                 table: "PeoplePlanets",
-                column: "PlanetId");
+                column: "PlanetId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_PeopleMovies_FilmId",
                 table: "PeopleMovies",
-                column: "FilmId");
+                column: "FilmId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_PeopleMovies_PersonId",
                 table: "PeopleMovies",
-                column: "PersonId");
+                column: "PersonId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilmVehicles_FilmId",
                 table: "FilmVehicles",
-                column: "FilmId");
+                column: "FilmId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilmVehicles_VehicleId",
                 table: "FilmVehicles",
-                column: "VehicleId");
+                column: "VehicleId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilmsStarships_FilmId",
                 table: "FilmsStarships",
-                column: "FilmId");
+                column: "FilmId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilmsStarships_StarshipId",
                 table: "FilmsStarships",
-                column: "StarshipId");
+                column: "StarshipId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilmsPlanets_FilmId",
                 table: "FilmsPlanets",
-                column: "FilmId");
+                column: "FilmId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilmsPlanets_PlanetId",
                 table: "FilmsPlanets",
-                column: "PlanetId");
+                column: "PlanetId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_FilmsPlanets_Films_FilmId",
@@ -126,7 +144,8 @@ namespace StarisApi.Migrations
                 column: "FilmId",
                 principalTable: "Films",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_FilmsPlanets_Planets_PlanetId",
@@ -134,7 +153,8 @@ namespace StarisApi.Migrations
                 column: "PlanetId",
                 principalTable: "Planets",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_FilmsStarships_Films_FilmId",
@@ -142,7 +162,8 @@ namespace StarisApi.Migrations
                 column: "FilmId",
                 principalTable: "Films",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_FilmsStarships_Starships_StarshipId",
@@ -150,7 +171,8 @@ namespace StarisApi.Migrations
                 column: "StarshipId",
                 principalTable: "Starships",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_FilmVehicles_Films_FilmId",
@@ -158,7 +180,8 @@ namespace StarisApi.Migrations
                 column: "FilmId",
                 principalTable: "Films",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_FilmVehicles_Vehicles_VehicleId",
@@ -166,7 +189,8 @@ namespace StarisApi.Migrations
                 column: "VehicleId",
                 principalTable: "Vehicles",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PeopleMovies_Films_FilmId",
@@ -174,7 +198,8 @@ namespace StarisApi.Migrations
                 column: "FilmId",
                 principalTable: "Films",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PeopleMovies_People_PersonId",
@@ -182,7 +207,8 @@ namespace StarisApi.Migrations
                 column: "PersonId",
                 principalTable: "People",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PeoplePlanets_People_PersonId",
@@ -190,7 +216,8 @@ namespace StarisApi.Migrations
                 column: "PersonId",
                 principalTable: "People",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PeoplePlanets_Planets_PlanetId",
@@ -198,137 +225,129 @@ namespace StarisApi.Migrations
                 column: "PlanetId",
                 principalTable: "Planets",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "StarShips");
+            migrationBuilder.DropTable(name: "StarShips");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_FilmsPlanets_Films_FilmId",
-                table: "FilmsPlanets");
+                table: "FilmsPlanets"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_FilmsPlanets_Planets_PlanetId",
-                table: "FilmsPlanets");
+                table: "FilmsPlanets"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_FilmsStarships_Films_FilmId",
-                table: "FilmsStarships");
+                table: "FilmsStarships"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_FilmsStarships_Starships_StarshipId",
-                table: "FilmsStarships");
+                table: "FilmsStarships"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_FilmVehicles_Films_FilmId",
-                table: "FilmVehicles");
+                table: "FilmVehicles"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_FilmVehicles_Vehicles_VehicleId",
-                table: "FilmVehicles");
+                table: "FilmVehicles"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PeopleMovies_Films_FilmId",
-                table: "PeopleMovies");
+                table: "PeopleMovies"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PeopleMovies_People_PersonId",
-                table: "PeopleMovies");
+                table: "PeopleMovies"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PeoplePlanets_People_PersonId",
-                table: "PeoplePlanets");
+                table: "PeoplePlanets"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PeoplePlanets_Planets_PlanetId",
-                table: "PeoplePlanets");
+                table: "PeoplePlanets"
+            );
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Starships",
-                table: "Starships");
+            migrationBuilder.DropPrimaryKey(name: "PK_Starships", table: "Starships");
 
-            migrationBuilder.DropIndex(
-                name: "IX_PeoplePlanets_PersonId",
-                table: "PeoplePlanets");
+            migrationBuilder.DropIndex(name: "IX_PeoplePlanets_PersonId", table: "PeoplePlanets");
 
-            migrationBuilder.DropIndex(
-                name: "IX_PeoplePlanets_PlanetId",
-                table: "PeoplePlanets");
+            migrationBuilder.DropIndex(name: "IX_PeoplePlanets_PlanetId", table: "PeoplePlanets");
 
-            migrationBuilder.DropIndex(
-                name: "IX_PeopleMovies_FilmId",
-                table: "PeopleMovies");
+            migrationBuilder.DropIndex(name: "IX_PeopleMovies_FilmId", table: "PeopleMovies");
 
-            migrationBuilder.DropIndex(
-                name: "IX_PeopleMovies_PersonId",
-                table: "PeopleMovies");
+            migrationBuilder.DropIndex(name: "IX_PeopleMovies_PersonId", table: "PeopleMovies");
 
-            migrationBuilder.DropIndex(
-                name: "IX_FilmVehicles_FilmId",
-                table: "FilmVehicles");
+            migrationBuilder.DropIndex(name: "IX_FilmVehicles_FilmId", table: "FilmVehicles");
 
-            migrationBuilder.DropIndex(
-                name: "IX_FilmVehicles_VehicleId",
-                table: "FilmVehicles");
+            migrationBuilder.DropIndex(name: "IX_FilmVehicles_VehicleId", table: "FilmVehicles");
 
-            migrationBuilder.DropIndex(
-                name: "IX_FilmsStarships_FilmId",
-                table: "FilmsStarships");
+            migrationBuilder.DropIndex(name: "IX_FilmsStarships_FilmId", table: "FilmsStarships");
 
             migrationBuilder.DropIndex(
                 name: "IX_FilmsStarships_StarshipId",
-                table: "FilmsStarships");
+                table: "FilmsStarships"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_FilmsPlanets_FilmId",
-                table: "FilmsPlanets");
+            migrationBuilder.DropIndex(name: "IX_FilmsPlanets_FilmId", table: "FilmsPlanets");
 
-            migrationBuilder.DropIndex(
-                name: "IX_FilmsPlanets_PlanetId",
-                table: "FilmsPlanets");
+            migrationBuilder.DropIndex(name: "IX_FilmsPlanets_PlanetId", table: "FilmsPlanets");
 
-            migrationBuilder.RenameTable(
-                name: "Starships",
-                newName: "StarShips");
+            migrationBuilder.RenameTable(name: "Starships", newName: "StarShips");
 
             migrationBuilder.RenameColumn(
                 name: "PersonId",
                 table: "PeoplePlanets",
-                newName: "CharacterId");
+                newName: "CharacterId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "PersonId",
                 table: "PeopleMovies",
-                newName: "MovieId");
+                newName: "MovieId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "FilmId",
                 table: "PeopleMovies",
-                newName: "CharacterId");
+                newName: "CharacterId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "FilmId",
                 table: "FilmVehicles",
-                newName: "MovieId");
+                newName: "MovieId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "FilmId",
                 table: "FilmsStarships",
-                newName: "MovieId");
+                newName: "MovieId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "FilmId",
                 table: "FilmsPlanets",
-                newName: "MovieId");
+                newName: "MovieId"
+            );
 
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_StarShips",
-                table: "StarShips",
-                column: "Id");
+            migrationBuilder.AddPrimaryKey(name: "PK_StarShips", table: "StarShips", column: "Id");
         }
     }
 }

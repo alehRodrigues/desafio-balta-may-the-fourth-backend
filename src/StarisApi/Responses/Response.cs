@@ -3,7 +3,8 @@ using StarisApi.Requests;
 
 namespace StarisApi.Responses
 {
-    public sealed class ResponseList<T, D> where T : IList<IDto> 
+    public sealed class ResponseList<T, D>
+        where T : IList<IDto>
     {
         public int Count { get; set; }
         public int Page { get; set; }
@@ -24,10 +25,14 @@ namespace StarisApi.Responses
             Page = request.Page ?? 1;
             PerPage = request.PerPage ?? 10;
             TotalPages = (int)Math.Ceiling((double)Count / PerPage);
-            Next = TotalPages > Page ? $"{host}/api/{dtoNameEndpoint}?page={Page + 1}" : $"{host}/api/{dtoNameEndpoint}?page={Page}";
-            Previous = Page <= TotalPages ? $"{host}/api/{dtoNameEndpoint}?page={Page}" : $"{host}/api/{dtoNameEndpoint}?page={Page - 1}";
+            Next =
+                TotalPages > Page
+                    ? $"{host}/api/{dtoNameEndpoint}?page={Page + 1}"
+                    : $"{host}/api/{dtoNameEndpoint}?page={Page}";
+            Previous =
+                Page <= TotalPages
+                    ? $"{host}/api/{dtoNameEndpoint}?page={Page}"
+                    : $"{host}/api/{dtoNameEndpoint}?page={Page - 1}";
         }
     }
-
-
 }

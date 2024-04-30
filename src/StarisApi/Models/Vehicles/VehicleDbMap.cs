@@ -20,7 +20,11 @@ namespace StarisApi.Models.Vehicles
             builder.Property(x => x.Manufacturer).HasColumnType("varchar(30)").IsRequired();
             builder.Property(x => x.MaxAtmospheringSpeed).HasColumnType("varchar(30)").IsRequired();
             builder.Property(x => x.VehicleClass).HasColumnType("varchar(30)").IsRequired();
-            builder.Property(x => x.ImageUrl).HasColumnType("varchar(255)").IsRequired().HasDefaultValue(string.Empty);
+            builder
+                .Property(x => x.ImageUrl)
+                .HasColumnType("varchar(255)")
+                .IsRequired()
+                .HasDefaultValue(string.Empty);
         }
     }
 }

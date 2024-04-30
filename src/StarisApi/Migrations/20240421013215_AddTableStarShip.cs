@@ -14,7 +14,8 @@ namespace StarisApi.Migrations
                 name: "StarShips",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Model = table.Column<string>(type: "varchar(30)", nullable: false),
                     Name = table.Column<string>(type: "varchar(30)", nullable: false),
@@ -24,7 +25,10 @@ namespace StarisApi.Migrations
                     Lenght = table.Column<string>(type: "varchar(30)", nullable: false),
                     Crew = table.Column<string>(type: "varchar(30)", nullable: false),
                     Passengers = table.Column<string>(type: "varchar(30)", nullable: false),
-                    MaxAtmospheringSpeed = table.Column<string>(type: "varchar(30)", nullable: false),
+                    MaxAtmospheringSpeed = table.Column<string>(
+                        type: "varchar(30)",
+                        nullable: false
+                    ),
                     HyperDriveRating = table.Column<string>(type: "varchar(30)", nullable: false),
                     Megalights = table.Column<string>(type: "varchar(30)", nullable: false),
                     CargoCapacity = table.Column<string>(type: "varchar(30)", nullable: false),
@@ -33,14 +37,14 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StarShips", x => x.Id);
-                });
+                }
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "StarShips");
+            migrationBuilder.DropTable(name: "StarShips");
         }
     }
 }

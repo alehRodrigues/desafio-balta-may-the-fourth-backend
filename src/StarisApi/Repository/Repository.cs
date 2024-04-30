@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Dynamic.Core;
+using Microsoft.EntityFrameworkCore;
 using StarisApi.DbContexts;
 using StarisApi.Dtos;
 using StarisApi.Extensions;
 using StarisApi.Models;
 using StarisApi.Requests;
 using StarisApi.Responses;
-using System.Linq.Dynamic.Core;
 
 namespace StarisApi.Repository
 {
-    public class Repository<TEntity> where TEntity : Entity, new()
+    public class Repository<TEntity>
+        where TEntity : Entity, new()
     {
         private readonly SqliteContext context;
 
@@ -18,11 +19,13 @@ namespace StarisApi.Repository
         public IDto? Find(int id)
         {
             var res = context.Find<TEntity>(id);
-            if (res is null) return null;
+            if (res is null)
+                return null;
             return res.ConvertToDto<IDto>();
         }
 
-        public ResponseList<IList<IDto>, T> GetAll<T>(Request request) where T:class
+        public ResponseList<IList<IDto>, T> GetAll<T>(Request request)
+            where T : class
         {
             var total = context.Set<TEntity>().Count();
             var searchParam = new TEntity().GetSearchParameter();
@@ -32,7 +35,10 @@ namespace StarisApi.Repository
             IQueryable<TEntity> listaEntity = context.Set<TEntity>().AsNoTracking();
 
             if (searchParam != null && request.Search != null)
-                listaEntity = listaEntity.Where($"{searchParam}.ToLower().Contains(@0)", $"{request.Search.Trim().ToLower()}");
+                listaEntity = listaEntity.Where(
+                    $"{searchParam}.ToLower().Contains(@0)",
+                    $"{request.Search.Trim().ToLower()}"
+                );
 
             if (sortParameters != null)
                 listaEntity = listaEntity.OrderBy(sortParameters, request.SortOrder);
@@ -41,7 +47,7 @@ namespace StarisApi.Repository
 
             var listaDto = listaEntity.ToList().ToDtoList<TEntity, T>();
 
-            return new ResponseList<IList<IDto>,T>(listaDto, total, request);
+            return new ResponseList<IList<IDto>, T>(listaDto, total, request);
         }
     }
 }

@@ -15,15 +15,14 @@ namespace StarisApi.Migrations
                 table: "Movies",
                 type: "varchar(255)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ImageUrl",
-                table: "Movies");
+            migrationBuilder.DropColumn(name: "ImageUrl", table: "Movies");
         }
     }
 }
