@@ -16,6 +16,5 @@ namespace StarisApi.Dtos
         public string ImageUrl { get; set; } = string.Empty;
         public ListDto Homeworld { get; set; } = null!;
         public ICollection<ListDto> Movies { get; set; } = null!;
-
     }
 }

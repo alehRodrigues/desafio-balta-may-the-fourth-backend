@@ -11,4 +11,9 @@ public class MovieVehicle()
 
     public virtual Movie Movie { get; set; } = null!;
     public virtual Vehicle Vehicle { get; set; } = null!;
+
+    public MovieVehicle MountRelation(int movieId, int planetId)
+    {
+        return new MovieVehicle { MovieId = movieId, VehicleId = planetId };
+    }
 }

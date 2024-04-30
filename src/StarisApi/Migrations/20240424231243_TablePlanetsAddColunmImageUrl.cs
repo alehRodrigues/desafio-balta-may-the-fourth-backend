@@ -15,15 +15,14 @@ namespace StarisApi.Migrations
                 table: "Planets",
                 type: "varchar(255)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ImageUrl",
-                table: "Planets");
+            migrationBuilder.DropColumn(name: "ImageUrl", table: "Planets");
         }
     }
 }

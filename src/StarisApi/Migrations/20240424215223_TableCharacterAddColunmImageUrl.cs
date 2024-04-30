@@ -10,29 +10,28 @@ namespace StarisApi.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "CharacetsPlanets");
+            migrationBuilder.DropTable(name: "CharacetsPlanets");
 
             migrationBuilder.AddColumn<string>(
                 name: "ImageUrl",
                 table: "Characters",
                 type: "varchar(255)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ImageUrl",
-                table: "Characters");
+            migrationBuilder.DropColumn(name: "ImageUrl", table: "Characters");
 
             migrationBuilder.CreateTable(
                 name: "CharacetsPlanets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CharacterId = table.Column<int>(type: "int", nullable: false),
                     PlanetId = table.Column<int>(type: "int", nullable: false)
@@ -45,24 +44,29 @@ namespace StarisApi.Migrations
                         column: x => x.CharacterId,
                         principalTable: "Characters",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade
+                    );
                     table.ForeignKey(
                         name: "FK_CharacetsPlanets_Planets_PlanetId",
                         column: x => x.PlanetId,
                         principalTable: "Planets",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_CharacetsPlanets_CharacterId",
                 table: "CharacetsPlanets",
-                column: "CharacterId");
+                column: "CharacterId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_CharacetsPlanets_PlanetId",
                 table: "CharacetsPlanets",
-                column: "PlanetId");
+                column: "PlanetId"
+            );
         }
     }
 }

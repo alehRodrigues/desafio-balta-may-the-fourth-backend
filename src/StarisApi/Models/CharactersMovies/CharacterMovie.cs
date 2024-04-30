@@ -6,8 +6,14 @@ namespace StarisApi.Models.CharactersMovies;
 public class CharacterMovie
 {
     public int Id { get; set; }
-    public int CharacterId { get; set; }
     public int MovieId { get; set; }
-    public virtual Character Character { get; set; } = null!;
+    public int CharacterId { get; set; }
+
     public virtual Movie Movie { get; set; } = null!;
+    public virtual Character Character { get; set; } = null!;
+
+    public CharacterMovie MountRelation(int movieId, int characterId)
+    {
+        return new CharacterMovie { MovieId = movieId, CharacterId = characterId };
+    }
 }

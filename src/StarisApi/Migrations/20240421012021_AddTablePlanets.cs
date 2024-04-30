@@ -14,7 +14,8 @@ namespace StarisApi.Migrations
                 name: "Planets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "varchar(30)", nullable: false),
                     Diameter = table.Column<string>(type: "varchar(30)", nullable: false),
@@ -29,14 +30,14 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Planets", x => x.Id);
-                });
+                }
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Planets");
+            migrationBuilder.DropTable(name: "Planets");
         }
     }
 }

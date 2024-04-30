@@ -1,6 +1,6 @@
 namespace StarisApi.Dtos
 {
-    public class VehiclesDto : IDto
+    public class VehicleDto : IDto
     {
         public int Id { get; set; }
         public string Model { get; set; } = null!;

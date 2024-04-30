@@ -10,32 +10,26 @@ namespace StarisApi.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Characters");
+            migrationBuilder.DropTable(name: "Characters");
 
-            migrationBuilder.DropTable(
-                name: "CharactersMoviesRelationship");
+            migrationBuilder.DropTable(name: "CharactersMoviesRelationship");
 
-            migrationBuilder.DropTable(
-                name: "CharactersPlanetsRelationship");
+            migrationBuilder.DropTable(name: "CharactersPlanetsRelationship");
 
-            migrationBuilder.DropTable(
-                name: "Movies");
+            migrationBuilder.DropTable(name: "Movies");
 
-            migrationBuilder.DropTable(
-                name: "MoviesPlanetsRelationship");
+            migrationBuilder.DropTable(name: "MoviesPlanetsRelationship");
 
-            migrationBuilder.DropTable(
-                name: "MovieStarshipsRelationship");
+            migrationBuilder.DropTable(name: "MovieStarshipsRelationship");
 
-            migrationBuilder.DropTable(
-                name: "MoviesVehiclesRelationship");
+            migrationBuilder.DropTable(name: "MoviesVehiclesRelationship");
 
             migrationBuilder.CreateTable(
                 name: "Films",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "varchar(50)", nullable: false),
                     Episode = table.Column<int>(type: "int", nullable: false),
@@ -47,13 +41,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Films", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "FilmsPlanets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     PlanetId = table.Column<int>(type: "int", nullable: false)
@@ -61,13 +57,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FilmsPlanets", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "FilmsStarships",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     StarshipId = table.Column<int>(type: "int", nullable: false)
@@ -75,13 +73,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FilmsStarships", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "FilmVehicles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false)
@@ -89,13 +89,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FilmVehicles", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "People",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "varchar(30)", nullable: false),
                     BirthYear = table.Column<string>(type: "varchar(30)", nullable: false),
@@ -115,14 +117,17 @@ namespace StarisApi.Migrations
                         column: x => x.PlanetId,
                         principalTable: "Planets",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "PeopleMovies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CharacterId = table.Column<int>(type: "int", nullable: false),
                     MovieId = table.Column<int>(type: "int", nullable: false)
@@ -130,13 +135,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PeopleMovies", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "PeoplePlanets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CharacterId = table.Column<int>(type: "int", nullable: false),
                     PlanetId = table.Column<int>(type: "int", nullable: false)
@@ -144,43 +151,39 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PeoplePlanets", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_People_PlanetId",
                 table: "People",
-                column: "PlanetId");
+                column: "PlanetId"
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Films");
+            migrationBuilder.DropTable(name: "Films");
 
-            migrationBuilder.DropTable(
-                name: "FilmsPlanets");
+            migrationBuilder.DropTable(name: "FilmsPlanets");
 
-            migrationBuilder.DropTable(
-                name: "FilmsStarships");
+            migrationBuilder.DropTable(name: "FilmsStarships");
 
-            migrationBuilder.DropTable(
-                name: "FilmVehicles");
+            migrationBuilder.DropTable(name: "FilmVehicles");
 
-            migrationBuilder.DropTable(
-                name: "People");
+            migrationBuilder.DropTable(name: "People");
 
-            migrationBuilder.DropTable(
-                name: "PeopleMovies");
+            migrationBuilder.DropTable(name: "PeopleMovies");
 
-            migrationBuilder.DropTable(
-                name: "PeoplePlanets");
+            migrationBuilder.DropTable(name: "PeoplePlanets");
 
             migrationBuilder.CreateTable(
                 name: "Characters",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     PlanetId = table.Column<int>(type: "INTEGER", nullable: false),
                     BirthYear = table.Column<string>(type: "varchar(30)", nullable: false),
@@ -200,14 +203,17 @@ namespace StarisApi.Migrations
                         column: x => x.PlanetId,
                         principalTable: "Planets",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "CharactersMoviesRelationship",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CharacterId = table.Column<int>(type: "int", nullable: false),
                     MovieId = table.Column<int>(type: "int", nullable: false)
@@ -215,13 +221,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CharactersMoviesRelationship", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "CharactersPlanetsRelationship",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CharacterId = table.Column<int>(type: "int", nullable: false),
                     PlanetId = table.Column<int>(type: "int", nullable: false)
@@ -229,13 +237,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CharactersPlanetsRelationship", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Director = table.Column<string>(type: "varchar(50)", nullable: false),
                     Episode = table.Column<int>(type: "int", nullable: false),
@@ -247,13 +257,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Movies", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "MoviesPlanetsRelationship",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     PlanetId = table.Column<int>(type: "int", nullable: false)
@@ -261,13 +273,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MoviesPlanetsRelationship", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "MovieStarshipsRelationship",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     StarshipId = table.Column<int>(type: "int", nullable: false)
@@ -275,13 +289,15 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MovieStarshipsRelationship", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "MoviesVehiclesRelationship",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table
+                        .Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false)
@@ -289,12 +305,14 @@ namespace StarisApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MoviesVehiclesRelationship", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Characters_PlanetId",
                 table: "Characters",
-                column: "PlanetId");
+                column: "PlanetId"
+            );
         }
     }
 }
