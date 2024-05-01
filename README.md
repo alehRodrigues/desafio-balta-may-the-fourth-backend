@@ -44,7 +44,12 @@ Desenvolvimento de uma API completa, fornecendo recursos como criação, leitura
     Todos os endpoints de consulta retornarão dados no tipo JSON. Consultas inválidas ou indisponíves retornaram um [status HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status) com o motivo da falha.
 
 ## 🧪 Como testar o projeto
-[DESCREVER COMO EXECUTAR O PROJETO]
+Você pode acessar a API via link
+`https://staris-api.runasp.net`
+e utilizar os endpoints, exemplo:
+`https://staris-api.runasp.net/api/characters`
+Você também pode utilizar os filtros como por exemplo 
+`https://staris-api.runasp.net/api/characters?search=3`
 
 ## Endpoints de Buscas
 1. Buscando Filmes
