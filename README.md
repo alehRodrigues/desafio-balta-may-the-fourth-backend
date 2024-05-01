@@ -24,6 +24,7 @@ Desenvolvimento de uma API completa, fornecendo recursos como criação, leitura
 * ASP.NET
 * Minimal APIs
 * SQLite
+* Monster ASP.NET
 
 ## 🥋 Skills Desenvolvidas
 * Comunicação
